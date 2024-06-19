@@ -13,7 +13,7 @@ import GameCard from "./GameCard"
 
 const GameGrid = () => {
 
-   // we have cut the usestate , our fetch, and useEffect
+   // we have cut the usestate , our fetch, and useEffect and place them into our custom hook
    // and now we simply use our custom hook useGames() hook
    const {games, error} = useGames() 
 
@@ -22,8 +22,8 @@ const GameGrid = () => {
     <>
         {/* display our data  ul  and li grid table usually a map with a unique key */}
         {/*  remember to use {} to do any logic */}
-
-        <SimpleGrid>
+                                      {/* every {1} is equal to 4 pixels */}
+        <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} spacing={10} padding={5}>  
             {games.map(game => <GameCard game={game} key={game.id}>{}</GameCard> )}
         </SimpleGrid>
 

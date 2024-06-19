@@ -2,12 +2,19 @@ import { useEffect, useState } from "react"
 import apiClient from "../services/apiClient"
 import { CanceledError } from "axios"
 
+// create the shape of the interface of the parent platform
+export interface Platform {
+    id: number;
+    name: string;
+    slug: string;
+}
 
 // help us shape our data in the form of our interfaces (type)
 export interface Game {
-    id: number
-    name: string
-    background_image: string
+    id: number;
+    name: string;
+    background_image: string;
+    parent_platforms: {platform: Platform}[];
 }
 
 export interface FetchGameResponse {
