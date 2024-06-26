@@ -17,7 +17,7 @@ const GameGrid = () => {
 
    // we have cut the usestate , our fetch, and useEffect and place them into our custom hook
    // and now we simply use our custom hook useGames() hook
-   const {games, error, isLoading} = useGames() 
+   const {data, error, isLoading} = useGames() 
 
     const skeleton = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,18,19,20];
     // we may have other helper functions to add, delete or update data
@@ -26,16 +26,18 @@ const GameGrid = () => {
         {/* display our data  ul  and li grid table usually a map with a unique key */}
         {/*  remember to use {} to do any logic */}
                                       {/* every {1} is equal to 4 pixels */}
-        <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} spacing={10} padding={5}>  
+        <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} 
+                    spacing={3} 
+                    padding={5}>  
             {isLoading && skeleton.map(skeleton => 
-            <GameCardContainer>
-              <GameCardSkeleton key={skeleton}/>
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton/>
             </GameCardContainer>
             
             )}
-            {games.map(game => 
-            <GameCardContainer>
-              <GameCard game={game} key={game.id}>{}</GameCard>
+            {data.map(game => 
+            <GameCardContainer key={game.id}>
+              <GameCard game={game} >{}</GameCard>
             </GameCardContainer>
             
             )}
