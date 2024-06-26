@@ -5,6 +5,8 @@ import apiClient from "../services/apiClient"
 import { SimpleGrid, Text } from "@chakra-ui/react"
 import useGames from "../hooks/useGames"
 import GameCard from "./GameCard"
+import GameCardSkeleton from "./GameCardSkeleton"
+import GameCardContainer from "./GameCardContainer"
 
 // sent to useGames.ts
 // stuff here
@@ -15,8 +17,9 @@ const GameGrid = () => {
 
    // we have cut the usestate , our fetch, and useEffect and place them into our custom hook
    // and now we simply use our custom hook useGames() hook
-   const {games, error} = useGames() 
+   const {games, error, isLoading} = useGames() 
 
+    const skeleton = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,18,19,20];
     // we may have other helper functions to add, delete or update data
   return (
     <>
@@ -24,7 +27,18 @@ const GameGrid = () => {
         {/*  remember to use {} to do any logic */}
                                       {/* every {1} is equal to 4 pixels */}
         <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} spacing={10} padding={5}>  
-            {games.map(game => <GameCard game={game} key={game.id}>{}</GameCard> )}
+            {isLoading && skeleton.map(skeleton => 
+            <GameCardContainer>
+              <GameCardSkeleton key={skeleton}/>
+            </GameCardContainer>
+            
+            )}
+            {games.map(game => 
+            <GameCardContainer>
+              <GameCard game={game} key={game.id}>{}</GameCard>
+            </GameCardContainer>
+            
+            )}
         </SimpleGrid>
 
         {/* render errors */}
