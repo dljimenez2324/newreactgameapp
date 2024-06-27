@@ -5,11 +5,16 @@ import GameGrid from './components/GameGrid'
 import { useState } from 'react'
 import { Genre } from './hooks/useGenres'
 import GenreList from './components/GenreList'
+import PlatformSelector from './components/PlatformSelector'
+import { Platform } from './hooks/usePlatforms'
 
 
 const App = () => {
 
   const [selectedGenre, setSelectedGenre] = useState<Genre |null>(null)
+
+  // rememeber we put our state where the parent component is so app is the parent for this usestate below
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null)
 
   return (
     <>
@@ -27,13 +32,14 @@ const App = () => {
         <Show above='lg'>
           <GridItem area="aside" padding={5}>
             {" "}
-            <GenreList onSelectedGenre={(genre) => setSelectedGenre(genre)}/>
+            <GenreList selectedGenre={selectedGenre} onSelectedGenre={(genre) => setSelectedGenre(genre)}/>
           </GridItem>
 
         </Show>
 
         <GridItem area="main" >
-          <GameGrid />
+          <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform) }/>
+          <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
         </GridItem>
       </Grid>
     </>

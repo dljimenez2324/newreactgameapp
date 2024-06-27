@@ -32,6 +32,15 @@ const useGenres = () => useData<Genre>('/genres')
 
 export default useGenres;
 
+
+
+
+
+
+
+
+
+
 // //We need our useStates to help us render update our UI with our Genress and others
 // const [genres, setGenres] = useState<Genre[]>([]);
 // const [error, setError] = useState("");

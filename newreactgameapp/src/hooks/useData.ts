@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import apiClient from "../services/apiClient"
-import { CanceledError } from "axios"
+import { AxiosRequestConfig, CanceledError } from "axios"
 
 // NOTICE TO GENERALIZE THE DATA WE WILL USE T AND DELETE INTERFACES AND PASS IN PARAMETERS INSTEAD   ENDPOINT 
 // // create the shape of the interface of the parent platform
@@ -24,7 +24,7 @@ export interface FetchResponse<T> {
 }
 
 
-const useData = <T> (endpoint: string) => {
+const useData = <T> (endpoint: string, requestConfig?: AxiosRequestConfig, deps?:any[]) => {
 
     // useStates to help us update our UI with our games or data
     const [data, setData] = useState<T[]>([])
@@ -45,7 +45,7 @@ const useData = <T> (endpoint: string) => {
         setIsLoading(true);
 
         apiClient
-        .get<FetchResponse<T>>(endpoint, {signal: controller.signal})  // the signal ... sends in parameter to the endpoint that we want to cancel subscription 
+        .get<FetchResponse<T>>(endpoint, {signal: controller.signal, ...requestConfig })  // the signal ... sends in parameter to the endpoint that we want to cancel subscription 
         .then(response => {
             setData(response.data.results)
             setIsLoading(false)
@@ -61,7 +61,7 @@ const useData = <T> (endpoint: string) => {
         return () => controller.abort(); // this will cancel the subscription (or stop using the api or unplug from the api after we're done)
         // fetchGames();
        
-     }, [])
+     },deps ? [...deps] : [] );
 
      return {data, error, isLoading}
 }

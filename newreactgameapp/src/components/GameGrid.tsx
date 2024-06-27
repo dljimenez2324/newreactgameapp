@@ -7,17 +7,24 @@ import useGames from "../hooks/useGames"
 import GameCard from "./GameCard"
 import GameCardSkeleton from "./GameCardSkeleton"
 import GameCardContainer from "./GameCardContainer"
+import { Genre } from "../hooks/useGenres"
+import { Platform } from "../hooks/usePlatforms"
 
 // sent to useGames.ts
 // stuff here
 
 // props to pass data from parent component to child component 
 
-const GameGrid = () => {
+interface Props {
+  selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
+}
+
+const GameGrid = ({selectedGenre, selectedPlatform}:Props) => {
 
    // we have cut the usestate , our fetch, and useEffect and place them into our custom hook
    // and now we simply use our custom hook useGames() hook
-   const {data, error, isLoading} = useGames() 
+   const {data, error, isLoading} = useGames(selectedGenre, selectedPlatform);
 
     const skeleton = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,18,19,20];
     // we may have other helper functions to add, delete or update data
