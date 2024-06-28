@@ -3,6 +3,7 @@ import apiClient from "../services/apiClient"
 import { CanceledError } from "axios"
 import useData from "./useData";
 import { Genre } from "./useGenres";
+import { GameQuery } from "../App";
 
 // create the shape of the interface of the parent platform
 export interface Platform {
@@ -25,7 +26,7 @@ export interface FetchGameResponse {
 }
 
 // to do a one liner we dont need the curly braces
-const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => useData<Game>('/games', {params:{genres:selectedGenre?.id, parent_platforms:selectedPlatform?.id}}, [selectedGenre?.id, selectedPlatform?.id])
+const useGames = (gameQuery:GameQuery) => useData<Game>('/games', {params:{genres:gameQuery.genre?.id, parent_platforms:gameQuery.platform?.id}}, [gameQuery])
 
 export default useGames
 
