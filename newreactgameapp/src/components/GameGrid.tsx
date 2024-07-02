@@ -36,7 +36,7 @@ const GameGrid = ({gameQuery}:Props) => {
         {/* display our data  ul  and li grid table usually a map with a unique key */}
         {/*  remember to use {} to do any logic */}
                                       {/* every {1} is equal to 4 pixels */}
-        <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} 
+        <SimpleGrid columns={{sm:1,md:2,lg:3,xl:4}} 
                     spacing={3} 
                     padding={5}>  
             {isLoading && skeleton.map(skeleton => 
