@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
-import apiClient from "../services/apiClient"
-import { CanceledError } from "axios"
+// import { useEffect, useState } from "react"
+// import apiClient from "../services/apiClient"
+// import { CanceledError } from "axios"
+// import { Genre } from "./useGenres";
 import useData from "./useData";
-import { Genre } from "./useGenres";
 import { GameQuery } from "../App";
 
 // create the shape of the interface of the parent platform
@@ -18,6 +18,7 @@ export interface Game {
     name: string;
     background_image: string;
     parent_platforms: {platform: Platform}[];
+    metacritic: number
 }
 
 export interface FetchGameResponse {

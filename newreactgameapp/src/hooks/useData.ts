@@ -47,11 +47,12 @@ const useData = <T> (endpoint: string, requestConfig?: AxiosRequestConfig, deps?
         apiClient
         .get<FetchResponse<T>>(endpoint, {signal: controller.signal, ...requestConfig })  // the signal ... sends in parameter to the endpoint that we want to cancel subscription 
         .then(response => {
-            setData(response.data.results)
             setIsLoading(false)
+            setData(response.data.results)
         })
         .catch((error) => {
             if (error instanceof CanceledError) return
+            // otherwise see below
             setIsLoading(true)
             setError(error.message);
             setIsLoading(false)

@@ -14,17 +14,17 @@ const SearchInput = ({onSearch}:Props) => {
 
   return (
     <>
-    <form onSubmit={e=> {
-        e.preventDefault();
-        if(ref.current) onSearch(ref.current.value);
-    }}>
+        <form onSubmit = {e => {
+                e.preventDefault();
+                if(ref.current) onSearch(ref.current.value);
+            }}>
 
-        <InputGroup>
-            <InputLeftElement children={<BsSearch/>}  />
-            <Input ref={ref} borderRadius={20} placeholder="Search games ..." variant={'filled'} />
-        </InputGroup>
+            <InputGroup>
+                <InputLeftElement children={<BsSearch/>}  />
+                <Input ref={ref} borderRadius={20} placeholder="Search games ..." variant={'filled'} />
+            </InputGroup>
 
-    </form>
+        </form>
     </>
   )
 }

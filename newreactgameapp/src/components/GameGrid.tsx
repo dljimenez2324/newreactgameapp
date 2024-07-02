@@ -1,14 +1,14 @@
 // all of our imports we need
 
-import { useEffect, useState } from "react"
-import apiClient from "../services/apiClient"
+// import { useEffect, useState } from "react"
+// import apiClient from "../services/apiClient"
+// import { Genre } from "../hooks/useGenres"
+// import { Platform } from "../hooks/usePlatforms"
 import { SimpleGrid, Text } from "@chakra-ui/react"
 import useGames from "../hooks/useGames"
 import GameCard from "./GameCard"
 import GameCardSkeleton from "./GameCardSkeleton"
 import GameCardContainer from "./GameCardContainer"
-import { Genre } from "../hooks/useGenres"
-import { Platform } from "../hooks/usePlatforms"
 import { GameQuery } from "../App"
 
 // sent to useGames.ts
@@ -38,7 +38,9 @@ const GameGrid = ({gameQuery}:Props) => {
                                       {/* every {1} is equal to 4 pixels */}
         <SimpleGrid columns={{sm:1,md:2,lg:3,xl:4}} 
                     spacing={3} 
-                    padding={5}>  
+                    padding={5}
+                    // padding={"20px"}
+                    >  
             {isLoading && skeleton.map(skeleton => 
             <GameCardContainer key={skeleton}>
               <GameCardSkeleton/>

@@ -3,15 +3,15 @@ import { useState } from "react"
 import { BiSolidChevronDown } from "react-icons/bi"
 
 interface Props {
-    onSelectedOrder: (sortOrder: string) => void
+    onSelectedSortOrder: (sortOrder: string) => void
 }
 
-const SortSelector = ({onSelectedOrder}:Props) => {
+const SortSelector = ({onSelectedSortOrder}:Props) => {
 
     const sortOrders = [
 
         {value: '', label: 'Relevance'},
-        {value: '-added', label: 'Date added'},
+        {value: '-added', label: 'Date Added'},
         {value: 'name', label: 'Name'},
         {value: 'released', label: 'Released Date'},
         {value: '-metacritic', label: 'Popularity'},
@@ -20,9 +20,9 @@ const SortSelector = ({onSelectedOrder}:Props) => {
     
     const [selectedSort, setSelectedSort] = useState('')
 
-    const handleSelectedSort = (value:string,label:string) => {
+    const handleSelectedSort = (value:string, label:string) => {
         setSelectedSort(label);
-        onSelectedOrder(value);
+        onSelectedSortOrder(value);
     }
 
   return (
@@ -30,7 +30,8 @@ const SortSelector = ({onSelectedOrder}:Props) => {
         <Menu>
             <MenuButton as={Button} rightIcon={<BiSolidChevronDown/>}>Ordered by {selectedSort || 'Relevance'}</MenuButton>
             <MenuList>
-                {/* <MenuItem>Relevance</MenuItem>
+                {/*  removed and replaced by a map of the sortOrders array of objects 
+                <MenuItem>Relevance</MenuItem>
                 <MenuItem>Date Added</MenuItem>
                 <MenuItem>Name</MenuItem>
                 <MenuItem>Release Date</MenuItem>
